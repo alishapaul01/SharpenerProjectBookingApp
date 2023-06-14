@@ -27,30 +27,7 @@
 
             </form>
         </div>
-        <script>
-        const nameInput= document.getElementById('name');
-        const email= document.getElementById('email');
-        const phone= document.getElementById('phone');
-        const date= document.getElementById('date');
-        const time= document.getElementById('time');
-        console.log(nameInput);
-        console.log(email);
-        console.log(phone);
-        console.log(date);
-        console.log(time);
-
-        const btn = document.querySelector('.btn')
-        
-        btn.addEventListener('click', (e) =>{
-            e.preventDefault();
-            localStorage.setItem('name', nameInput.value);
-            localStorage.setItem('email', email.value);
-            localStorage.setItem('date', date.value);
-            localStorage.setItem('phone', phone.value);
-            localStorage.setItem('time', time.value);
-        });
-
-        </script>
+        <script src="index.js"></script>
     
 
     </body>
