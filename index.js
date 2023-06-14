@@ -1,9 +1,9 @@
 let myObj ={
-    nameInput: "document.getElementById('name')" ;
-    email: "document.getElementById('email')";
-    phone: "document.getElementById('phone')";
-    date: "document.getElementById('date')";
-    time: "document.getElementById('time')";
+    nameInput: "document.getElementById('name')",
+    email: "document.getElementById('email')",
+    phone: "document.getElementById('phone')",
+    date: "document.getElementById('date')",
+    time: "document.getElementById('time')"
 }
 
 let myObjString = JSON.stringify(myObj);
