@@ -45,9 +45,9 @@ function onSubmit(e) {
             Phonenumber: phonenumber.value
         }
 
-        let Serialised = JSON.stringify(userDetails);
+        //let Serialised = JSON.stringify(userDetails);
 
-        axios.post("https://crudcrud.com/api/92bbc30879ea4a53bfcb56470db8350f/appointmentdata", userDetails)
+        axios.post("https://crudcrud.com/api/c3901d542a8345e7bcf1d226122e76a0/appointmentdata", userDetails)
         .then((response)=>{
             showuseronScreen(response.data)
             //console.log(response)
@@ -56,15 +56,40 @@ function onSubmit(e) {
             console.log(err)
         })
         //localStorage.setItem(userDetails.Email, Serialised);
-        showuseronScreen(userDetails);
+        //showuseronScreen(userDetails);
 
         nameInput.value = '';
         email.value = '';
         phonenumber.value = '';
+        
     }
 }
+window.addEventListener("DOMContentLoaded", () => {
+    axios.get("https://crudcrud.com/api/c3901d542a8345e7bcf1d226122e76a0/appointmentdata")
+    .then((response)=>{
+            console.log(response);
+            for(var i=0; i<response.data.length; i++){
+            showuseronScreen(response.data[i])
+        }
+    })
+    .catch((error)=>{
+            console.log(error)
+        })
+})
+/*Object.keys(localStorage).forEach((key) => {
+    const stringifiedDetails = localStorage.getItem(key);
+    const details = JSON.parse(stringifiedDetails);
+    showUsersOnScreen(details);
+})
+})*/
 
 function showuseronScreen(user){
+    //nameInput.value = '';
+      //  email.value = '';
+      //  phonenumber.value = '';
+   if(localStorage.getItem(user.Email) !== null){
+     removeuserfromScreen(user.Email)
+    }
     const parentNode = document.getElementById('users');
     const childHTML = `<li id=${user.Email}>  ${user.Name} : ${user.Email} : ${user.Phonenumber}
     <button onClick=deleteUser("${user.Email}")>Delete User</button>
