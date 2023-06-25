@@ -19,7 +19,7 @@
                 <label for="phonenumber" class="form-label">NUMBER:</label>
                 <input type="text" class="form-control" id="phonenumber">
                 <br>
-                <input class="btn btn-primary" type="submit" value="SUBMIT">
+                <input class="btn btn-success" type="submit" value="SUBMIT">
             </form>
         </div>
 
@@ -91,9 +91,9 @@ function showuseronScreen(user){
      removeuserfromScreen(user.Email)
     }
     const parentNode = document.getElementById('users');
-    const childHTML = `<li id=${user.Email}>  ${user.Name} : ${user.Email} : ${user.Phonenumber}
-    <button onClick=deleteUser("${user.Email}")>Delete User</button>
-    <button onclick=editUser("${user.Email}","${user.Name}","${user.Phonenumber}")>Edit User</button>
+    const childHTML = `<li id=${user._id}>  ${user.Name} : ${user.Email} : ${user.Phonenumber}
+    <button class="btn btn-danger" onClick=deleteUser("${user._id}")>Delete User</button>
+    <button  class="btn btn-info" onclick=editUser("${user._id}","${user.Name}","${user.Phonenumber}")>Edit Details</button>
     </li>`
     parentNode.innerHTML = parentNode.innerHTML + childHTML;
 }
@@ -105,14 +105,22 @@ function editUser(Email,Name,Phonenumber){
     deleteUser(Email);
 }
 
-function deleteUser(Email){
-    localStorage.removeItem(Email);
-    removeuserfromScreen(Email);
+function deleteUser(userId){
+    axios.delete(`https://crudcrud.com/api/c3901d542a8345e7bcf1d226122e76a0/appointmentdata/${userId}`)
+    .then((response)=>{
+        removeuserfromScreen(userId)
+     })
+    .catch((err)=> {
+        console.log(err)
+    })
 }
+    //localStorage.removeItem(Email);
+   // removeuserfromScreen(Email);
 
-function removeuserfromScreen(Email){
+
+function removeuserfromScreen(userId){
     const parentNode = document.getElementById('users');
-    const deleteChild = document.getElementById(Email);
+    const deleteChild = document.getElementById(userId);
     if(deleteChild){
         parentNode.removeChild(deleteChild);
     }
